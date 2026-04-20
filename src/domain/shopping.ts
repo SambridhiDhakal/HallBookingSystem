@@ -1,0 +1,1 @@
+// Any logic that is internal to our application will reside in this domain layer
