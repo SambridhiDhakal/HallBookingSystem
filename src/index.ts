@@ -1,21 +1,15 @@
 import express from "express";
-import dotenv from "dotenv-safe";
-import cors from 'cors';
-import shoppingRoutes from "./ports/rest/routes/shopping";
+import cors from "cors";
 
 const app = express();
-app.use(express.urlencoded({extended: false}));
-app.use(cors())
+
+app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 app.use(express.json());
 
-dotenv.config(); //allows environment variables to be accessed.
-
-// Health check
-app.use("/healthcheck", (req: any, res: any, next: any) => {
-  res.status(200).json({ message: "Successful" });
+app.get("/", (_req, res) => {
+  res.status(200).json({ message: "Server is running" });
 });
-
-app.use("/shopping", shoppingRoutes);
 
 const port = 3000;
 
