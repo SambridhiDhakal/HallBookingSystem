@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import hallsRoutes from "./ports/rest/routes/halls";
 
 const app = express();
 
@@ -12,6 +13,8 @@ app.get("/", (_req, res) => {
 });
 
 const port = 3000;
+
+app.use("/halls", hallsRoutes);
 
 app.listen(port, () => {
   console.log(`Now listening on port ${port}`);
