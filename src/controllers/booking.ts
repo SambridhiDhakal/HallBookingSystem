@@ -28,6 +28,5 @@ export const createBooking = (req: Request, res: Response) => {
 
   bookings.push(newBooking);
 
-  // 4. Return response
   res.status(201).json(newBooking);
 };

@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import hallsRoutes from "./ports/rest/routes/halls";
 import bookingsRoutes from "./ports/rest/routes/booking";
+import authRoutes from "./ports/rest/routes/auth";
 
 const app = express();
 
@@ -17,6 +18,7 @@ const port = 3000;
 
 app.use("/halls", hallsRoutes);
 app.use("/bookings", bookingsRoutes);
+app.use("/auth", authRoutes);
 
 app.listen(port, () => {
   console.log(`Now listening on port ${port}`);
