@@ -23,7 +23,8 @@ export const createBooking = (req: Request, res: Response) => {
     date,
     startTime,
     endTime,
-    expectedGuests
+    expectedGuests,
+    status: "Pending"
   };
 
   bookings.push(newBooking);

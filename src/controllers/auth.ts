@@ -21,7 +21,8 @@ export const registerUser = async (req: Request, res: Response) => {
     id: users.length + 1,
     name,
     email,
-    password: hashedPassword
+    password: hashedPassword,
+    role: 'user'
   };
 
   users.push(newUser);
@@ -49,7 +50,7 @@ export const loginUser = async (req: Request, res: Response) => {
   }
 
   const token = jwt.sign(
-    { id: user.id, email: user.email },
+    { id: user.id, email: user.email, role: user.role},
     SECRET_KEY,
     { expiresIn: "1h" }
   );

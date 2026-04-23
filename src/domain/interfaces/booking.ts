@@ -6,4 +6,5 @@ export interface Booking {
   startTime: string;
   endTime: string;
   expectedGuests: number;
+  status: string;
 }
