@@ -12,6 +12,7 @@
     "noImplicitAny": true,
     "skipLibCheck": true,
     "sourceMap": true,
+    "types": ["node", "jest"]
   },
   "include": [
     "src/**/*"
@@ -19,4 +20,5 @@
   "exclude": [
     "node_modules"
   ]
+  
 }

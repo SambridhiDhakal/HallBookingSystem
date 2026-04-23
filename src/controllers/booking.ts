@@ -1,33 +1,34 @@
 import { Request, Response } from "express";
 import { bookings, halls } from "../infrastructure/data";
+import { buildBooking, exceedsCapacity, findHallById } from "./helpers/bookingHelpers";
+
+export const getBookings = (_req: Request, res: Response) => {
+  return res.status(200).json(bookings);
+};
 
 export const createBooking = (req: Request, res: Response) => {
-  const { hallId, userName, date, startTime, endTime, expectedGuests } = req.body;
+  const { hallId, userName, date, startTime, endTime, guests } = req.body;
 
-  //Checking hall existence
-  const hall = halls.find(h => h.id === hallId);
+  const hall = findHallById(hallId);
+
   if (!hall) {
     return res.status(400).json({ message: "Hall not found" });
   }
 
-  //Checking hall capacity
-  if (expectedGuests > hall.capacity) {
+  if (exceedsCapacity(hall.capacity, guests)) {
     return res.status(400).json({ message: "Exceeds hall capacity" });
   }
 
-  //Creating booking
-  const newBooking = {
-    id: bookings.length + 1,
+  const newBooking = buildBooking(
     hallId,
     userName,
     date,
     startTime,
     endTime,
-    expectedGuests,
-    status: "Pending"
-  };
+    guests
+  );
 
   bookings.push(newBooking);
 
-  res.status(201).json(newBooking);
+  return res.status(201).json(newBooking);
 };
